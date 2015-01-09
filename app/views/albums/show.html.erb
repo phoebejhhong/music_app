@@ -1,0 +1,27 @@
+<h1><%= @album.name %></h1>
+<h3><%= @album.kind.capitalize %> Album of <%= @album.band.name %></h3>
+
+<% if @album.tracks.any? %>
+<ul>
+  <% @album.tracks.each do |track| %>
+  <li>
+    <%= link_to track.name, track_url(track) %>
+  </li>
+  <% end %>
+</ul>
+<% else %>
+<p> No Track Added Yet </p>
+<% end %>
+
+<%= link_to ":: Edit Album", edit_album_url %>
+<%= link_to ":: Back to #{@album.band.name}", band_url(@album.band) %><br />
+<%= link_to ":: Add a Track", new_track_url %>
+
+<form action="/albums/<%= @album.id %>" method="post">
+  <input type="hidden" name="_method" value="DELETE">
+
+  <input type="hidden"
+  name="authenticity_token"
+  value="<%= form_authenticity_token %>">
+  <input type="submit" value="Delete this album">
+</form>

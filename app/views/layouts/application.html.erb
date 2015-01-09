@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Music Inventory</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <% if logged_in? %>
+    <form action="/session" method="post">
+      <input type="hidden"
+              name="authenticity_token"
+              value="<%= form_authenticity_token %>">
+      <input type="hidden" name="_method" value="delete">
+      <input type="submit" value="Sign out">
+    </form>
+  <% else %>
+    <%= link_to "Sign in", new_session_url %> or
+    <%= link_to "Sign up", new_user_url %>
+  <% end %>
+
+<%= yield %>
+
+</body>
+</html>

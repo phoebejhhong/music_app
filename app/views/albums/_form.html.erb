@@ -1,0 +1,40 @@
+<% action_path = album.persisted? ?  "/albums/#{album.id}" : "/albums" %>
+<% req_method = album.persisted? ?  "PATCH" : "POST"  %>
+<% submit_value = album.persisted? ?  "Edit!" : "Create!"  %>
+
+<form action="<%= action_path %>" method="post">
+  <input type="hidden" name="_method" value="<%= req_method %>">
+
+  <input type="hidden"
+  name="authenticity_token"
+  value="<%= form_authenticity_token %>">
+
+  <label for="album_name">Name</label>
+  <input id="album_name"
+  type="text"
+  name="album[name]"
+  value="<%= album.name %>"><br />
+
+  <label for="album_band_id">Band</label>
+  <select id="album_band_id"
+  name="album[band_id]">
+  <% Band.all.each do |band| %>
+  <option value = <%= band.id %>
+    <%= "selected" if band.id == album.band_id %>>
+    <%= band.name %>
+  </option>
+  <% end %>
+</select><br />
+
+<% Album::KINDS.each do |kind| %>
+<label>
+  <input type="radio"
+  name="album[kind]"
+  value="<%= kind %>"
+  <%= "checked" if kind == album.kind %>>
+  <%= kind.capitalize %>
+</label>
+<% end %>
+
+<input type="submit" value="<%= submit_value %>">
+</form>
