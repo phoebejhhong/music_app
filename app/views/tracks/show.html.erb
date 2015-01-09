@@ -1,11 +1,11 @@
 <h1><%= @track.name %></h1>
-<h3><%= @track.kind.capitalize %> track of <%= @track.album.name %></h3>
+<h3><%= @track.kind.capitalize %> track of <%= @track.band.name %> album, <%= @track.album.name %></h3>
 
-<% if @track.lyrics.nil? %>
-<p> No Lyrics </p>
+<% if @track.lyrics.empty? %>
+  <p> No Lyrics </p>
 <% else %>
-<h4>Lyrics</h4>
- <%= ugly_lyrics @track.lyrics %>
+  <h4>Lyrics</h4>
+  <%= ugly_lyrics @track.lyrics %>
 <% end %>
 
 <% if @track.notes.empty? %>

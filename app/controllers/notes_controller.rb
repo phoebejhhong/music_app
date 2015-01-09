@@ -10,7 +10,10 @@ class NotesController < ApplicationController
 
   def destroy
     note = Note.find(params[:id])
-    render text: "You dare", status: 403 unless current_user.id == note.user_id
+    unless admin? || current_user.id == note.user_id
+      render text: "You dare", status: 403
+      return
+    end
     track = note.track
     note.destroy
     redirect_to track_url(track)

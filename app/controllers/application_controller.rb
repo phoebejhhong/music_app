@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :require_login
 
-  helper_method :current_user, :logged_in?, :long_in_user!
+  helper_method :current_user, :logged_in?, :long_in_user!, :admin?
 
   def current_user
     user = User.find_by(session_token: session[:session_token])
@@ -19,6 +19,10 @@ class ApplicationController < ActionController::Base
     user.reset_session_token
     user.save!
     session[:session_token] = user.session_token
+  end
+
+  def admin?
+    current_user.admin
   end
 
   private

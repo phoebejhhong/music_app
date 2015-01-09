@@ -16,6 +16,10 @@
       <input type="hidden" name="_method" value="delete">
       <input type="submit" value="Sign out">
     </form>
+    <%= link_to "All Bands", bands_url %>
+    <% if admin? %>
+      <%= link_to "Manage Users", users_url %>
+    <% end %>
   <% else %>
     <%= link_to "Sign in", new_session_url %> or
     <%= link_to "Sign up", new_user_url %>

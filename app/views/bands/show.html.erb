@@ -13,7 +13,7 @@
 
 <%= link_to ":: Edit Band Profile", edit_band_url %>
 <%= link_to ":: Back to All Bands", bands_url %><br />
-<%= link_to ":: Add Album", new_album_url %><br />
+<%= link_to ":: Add Album", new_band_album_url(@band) %><br />
 
 <form action="/bands/<%= @band.id %>" method="post">
   <input type="hidden" name="_method" value="DELETE">
