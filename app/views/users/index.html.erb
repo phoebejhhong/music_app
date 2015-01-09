@@ -1,8 +1,22 @@
 <table>
-  <tr>
-    <% @users.each do |user| %>
+  <% @users.each do |user| %>
+    <tr>
       <td> <%= user.id %> </td>
       <td> <%= user.email %> </td>
-    <% end %>
-  </tr>
+      <td>
+        <% if user.admin == true %>
+          admin
+        <% else %>
+        <form action="/users/<%= user.id %>/make_admin" method="post">
+          <input type="hidden" name="_method" value="PATCH">
+
+          <input type="hidden"
+          name="authenticity_token"
+          value="<%= form_authenticity_token %>">
+          <input type="submit" value="Make admin">
+        </form>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
 </table>

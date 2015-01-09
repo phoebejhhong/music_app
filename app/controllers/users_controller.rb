@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :require_login, only: [:new, :create]
-  before_action: ensure_admin, only: [:index]
+  before_action :ensure_admin, only: [:index, :make_admin]
 
   def new
     @user = User.new
@@ -18,8 +18,13 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    @users = User.all.order(:id)
     render :index
+  end
+
+  def make_admin
+    User.find(params[:user_id]).update(admin: true)
+    redirect_to users_url
   end
 
   private
