@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   resource :user, only: [:new, :create, :show]
   resources :users, only: [:index] do
-    patch "make_admin", to: "users#make_admin"
+    patch "make_admin"
+    get "activate", on: :collection
   end
   resource :session, only: [:new, :create, :destroy]
 

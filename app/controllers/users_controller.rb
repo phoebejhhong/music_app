@@ -27,6 +27,12 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  def activate
+    User.find_by(activation_token: params[:activation_token]).update(activated: true)
+    flash[:notice] = "Activated!"
+    redirect_to bands_url
+  end
+
   private
   def user_params
     params.require(:user).permit(:email, :password)

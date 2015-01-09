@@ -1,3 +1,10 @@
+
+<% if @user.errors.any? %>
+<% @user.errors.full_messages.each do |msg| %>
+<div><%= msg %></div>
+<% end %>
+<% end %>
+
 <h1>Sign up</h1>
 <form action="/user" method="post">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">

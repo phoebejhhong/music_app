@@ -4,7 +4,9 @@ class User < ActiveRecord::Base
   validates :email, presence: true, uniqueness: true
   validates :password, length: { minimum: 6, allow_nil: true }
   validates :password_digest, :session_token, presence: true
-  before_validation :ensure_session_token, :ensure_not_admin
+  validates :activated, inclusion: { in: [true, false] }
+  before_validation :ensure_session_token, :ensure_not_admin,
+                  :ensure_activation_token, :ensure_unactivated
 
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
@@ -35,7 +37,15 @@ class User < ActiveRecord::Base
   end
 
   def ensure_not_admin
-    self.admin = false if self.admin.nil? && self.admin != true
+    self.admin = false if self.admin.nil?
+  end
+
+  def ensure_activation_token
+    self.activation_token = SecureRandom.urlsafe_base64
+  end
+
+  def ensure_unactivated
+    self.activated = false if self.activated.nil?
   end
 
 end

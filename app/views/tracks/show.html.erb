@@ -1,6 +1,7 @@
-<h1><%= @track.name %></h1>
-<h3><%= @track.kind.capitalize %> track of <%= @track.band.name %> album, <%= @track.album.name %></h3>
-
+<div class="page-header">
+  <h1><%= @track.name %></h1>
+  <h3><%= @track.kind.capitalize %> track of <%= @track.band.name %> album, <%= @track.album.name %></h3>
+</div>
 <% if @track.lyrics.empty? %>
   <p> No Lyrics </p>
 <% else %>

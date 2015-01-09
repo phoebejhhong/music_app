@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.0.rc3'
 gem 'bcrypt'
 gem 'pg'
+gem 'bootstrap-sass'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -46,4 +47,5 @@ end
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem "letter_opener"
 end

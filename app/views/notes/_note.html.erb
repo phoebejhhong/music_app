@@ -1,27 +1,19 @@
-<div>
-  <%= note.body %>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= note.body %>
+  </div>
+  <div class="panel-footer">
+    noted by <%= note.user.email %>
+    <% if note.user_id == current_user.id || admin? %>
+    <form action="/tracks/<%= track.id %>/notes/<%= note.id %>" method="post">
+      <input type="hidden" name="_method" value="DELETE">
+
+      <input type="hidden"
+      name="authenticity_token"
+      value="<%= form_authenticity_token %>">
+
+      <input type="submit" value="Delete">
+    <% end %>
+    </form>
+  </div>
 </div>
-<div>
-  noted by <%= note.user.email %>
-</div>
-<% if note.user_id == current_user.id %>
-  <form action="/tracks/<%= track.id %>/notes/<%= note.id %>" method="post">
-    <input type="hidden" name="_method" value="DELETE">
-
-    <input type="hidden"
-    name="authenticity_token"
-    value="<%= form_authenticity_token %>">
-
-    <input type="submit" value="Delete">
-  </form>
-<% elsif admin? %>
-  <form action="/tracks/<%= track.id %>/notes/<%= note.id %>" method="post">
-    <input type="hidden" name="_method" value="DELETE">
-
-    <input type="hidden"
-            name="authenticity_token"
-            value="<%= form_authenticity_token %>">
-
-    <input type="submit" value="Delete">
-  </form>
-<% end %>

@@ -1,4 +1,20 @@
-<table>
+<div class="page-header">
+  <h1>Manage Users With Your Super Power</h1>
+</div>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>
+      ID
+    </th>
+    <th>
+      email
+    </th>
+    <th>
+      admin?
+    </th>
+  </tr>
+</thead>
   <% @users.each do |user| %>
     <tr>
       <td> <%= user.id %> </td>
