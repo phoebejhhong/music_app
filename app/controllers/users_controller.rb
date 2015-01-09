@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :require_login, only: [:new, :create]
+  before_action: ensure_admin, only: [:index]
 
   def new
     @user = User.new
@@ -16,9 +17,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def index
+    @users = User.all
+    render :index
+  end
+
   private
   def user_params
     params.require(:user).permit(:email, :password)
+  end
+
+  def ensure_admin
+    unless current_user.admin == true
+      flash[:error] = "Admin only!"
+      redirect_to new_session_url
+    end
   end
 
 end

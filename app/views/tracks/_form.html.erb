@@ -1,3 +1,9 @@
+<% if track.errors.any? %>
+  <% track.errors.full_messages.each do |msg| %>
+    <div><%= msg %></div>
+  <% end %>
+<% end %>
+
 <% action_path = track.persisted? ?  "/tracks/#{track.id}" : "/tracks" %>
 <% req_method = track.persisted? ?  "PATCH" : "POST"  %>
 <% submit_value = track.persisted? ?  "Edit!" : "Create!"  %>

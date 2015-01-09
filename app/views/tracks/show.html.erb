@@ -8,6 +8,17 @@
  <%= ugly_lyrics @track.lyrics %>
 <% end %>
 
+<% if @track.notes.empty? %>
+  <div> No Note Yet </div>
+<% else %>
+  <h4>Notes</h4>
+  <% @track.notes.each do |note| %>
+    <%= render "notes/note", note: note, track: @track %>
+  <% end %>
+<% end %>
+
+<%= render "notes/form", note: Note.new, track_id: @track.id %>
+
 <%= link_to ":: Edit track", edit_track_url %>
 <%= link_to ":: Back to #{@track.album.name}", album_url(@track.album) %><br />
 

@@ -1,0 +1,17 @@
+<% action_path = note.persisted? ?  "/tracks/#{track_id}/notes/#{note.id}" : "/tracks/#{track_id}/notes" %>
+<% req_method = note.persisted? ?  "PATCH" : "POST"  %>
+<% submit_value = note.persisted? ?  "Edit!" : "Create!"  %>
+
+<form action="<%= action_path %>" method="post">
+  <input type="hidden" name="_method" value="<%= req_method %>">
+
+  <input type="hidden"
+          name="authenticity_token"
+          value="<%= form_authenticity_token %>">
+  <label for="note_body">Add New Note</label><br />
+  <textarea id="note_body"
+            name="note[body]">
+<%= note.body %></textarea>
+
+  <input type="submit" value="<%= submit_value %>">
+</form>

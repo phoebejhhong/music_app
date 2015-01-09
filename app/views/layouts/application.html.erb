@@ -20,6 +20,13 @@
     <%= link_to "Sign up", new_user_url %>
   <% end %>
 
+  <%- if flash.any? %>
+    <%- flash.keys.each do |flash_key| %>
+      <%- next if flash_key.to_s == 'timedout' %>
+      <div><%= flash.discard(flash_key) %></div>
+    <%- end %>
+  <%- end %>
+
 <%= yield %>
 
 </body>

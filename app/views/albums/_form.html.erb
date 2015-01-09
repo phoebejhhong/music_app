@@ -1,3 +1,10 @@
+
+<% if album.errors.any? %>
+  <% album.errors.full_messages.each do |msg| %>
+    <div><%= msg %></div>
+  <% end %>
+<% end %>
+
 <% action_path = album.persisted? ?  "/albums/#{album.id}" : "/albums" %>
 <% req_method = album.persisted? ?  "PATCH" : "POST"  %>
 <% submit_value = album.persisted? ?  "Edit!" : "Create!"  %>
